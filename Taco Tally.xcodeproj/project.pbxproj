@@ -1,0 +1,751 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		41216AD62571B4CE00C8C3B0 /* Taco_TallyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216AD52571B4CE00C8C3B0 /* Taco_TallyApp.swift */; };
+		41216AD82571B4CE00C8C3B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216AD72571B4CE00C8C3B0 /* ContentView.swift */; };
+		41216ADA2571B4D000C8C3B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41216AD92571B4D000C8C3B0 /* Assets.xcassets */; };
+		41216ADD2571B4D000C8C3B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41216ADC2571B4D000C8C3B0 /* Preview Assets.xcassets */; };
+		41216AE82571B4D100C8C3B0 /* Taco_TallyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216AE72571B4D100C8C3B0 /* Taco_TallyTests.swift */; };
+		41216AF32571B4D100C8C3B0 /* Taco_TallyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216AF22571B4D100C8C3B0 /* Taco_TallyUITests.swift */; };
+		41216B172571B5BC00C8C3B0 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216B162571B5BC00C8C3B0 /* CustomTabBar.swift */; };
+		41216B1C2571B5EF00C8C3B0 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216B1B2571B5EF00C8C3B0 /* HomeTab.swift */; };
+		41216B212571B67D00C8C3B0 /* LeaderboardTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216B202571B67D00C8C3B0 /* LeaderboardTab.swift */; };
+		41216B262571B69B00C8C3B0 /* HistoryTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216B252571B69B00C8C3B0 /* HistoryTab.swift */; };
+		41216B2B2571B6B400C8C3B0 /* ProfileTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216B2A2571B6B400C8C3B0 /* ProfileTab.swift */; };
+		41216B312571BABD00C8C3B0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41216B302571BABD00C8C3B0 /* Users.swift */; };
+		41415E8A2571D8360004B8F9 /* IntAbrreviations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41415E892571D8350004B8F9 /* IntAbrreviations.swift */; };
+		414504A925720D7C001E664F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 414504A825720D7C001E664F /* GoogleService-Info.plist */; };
+		414D9ADE2572721800A1C522 /* myProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D9ADD2572721800A1C522 /* myProfileModel.swift */; };
+		414D9AE3257272D800A1C522 /* UploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D9AE2257272D800A1C522 /* UploadImage.swift */; };
+		414D9AE82572734E00A1C522 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D9AE72572734E00A1C522 /* ImagePicker.swift */; };
+		414D9AFA2572749F00A1C522 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D9AF82572749F00A1C522 /* Login.swift */; };
+		414D9B3825727DFF00A1C522 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D9B3725727DFF00A1C522 /* Countries.swift */; };
+		414D9B4F25727F1900A1C522 /* AlertViewB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D9B4E25727F1900A1C522 /* AlertViewB.swift */; };
+		4156C5DF2572A3D000AF9A6E /* createUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C5DD2572A3D000AF9A6E /* createUser.swift */; };
+		4156C5E02572A3D000AF9A6E /* CheckUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C5DE2572A3D000AF9A6E /* CheckUser.swift */; };
+		4156C6092572A8AF00AF9A6E /* AccountCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C6082572A8AF00AF9A6E /* AccountCreation.swift */; };
+		4156C60E2572A8D200AF9A6E /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C60D2572A8D200AF9A6E /* Indicator.swift */; };
+		4156C6132572A92000AF9A6E /* LoginAccountCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C6122572A92000AF9A6E /* LoginAccountCreation.swift */; };
+		EB59E825E0561DFDB2F0C230 /* Pods_Taco_Tally.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB1CCEDDB3F2F697C4DA129 /* Pods_Taco_Tally.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		41216AE42571B4D100C8C3B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41216ACA2571B4CE00C8C3B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41216AD12571B4CE00C8C3B0;
+			remoteInfo = "Taco Tally";
+		};
+		41216AEF2571B4D100C8C3B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41216ACA2571B4CE00C8C3B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41216AD12571B4CE00C8C3B0;
+			remoteInfo = "Taco Tally";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		295D7709C62D7D1FB690A83D /* Pods-Taco Tally.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taco Tally.debug.xcconfig"; path = "Target Support Files/Pods-Taco Tally/Pods-Taco Tally.debug.xcconfig"; sourceTree = "<group>"; };
+		41216AD22571B4CE00C8C3B0 /* Taco Tally.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Taco Tally.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41216AD52571B4CE00C8C3B0 /* Taco_TallyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taco_TallyApp.swift; sourceTree = "<group>"; };
+		41216AD72571B4CE00C8C3B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		41216AD92571B4D000C8C3B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		41216ADC2571B4D000C8C3B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		41216ADE2571B4D000C8C3B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41216AE32571B4D100C8C3B0 /* Taco TallyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Taco TallyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41216AE72571B4D100C8C3B0 /* Taco_TallyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taco_TallyTests.swift; sourceTree = "<group>"; };
+		41216AE92571B4D100C8C3B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41216AEE2571B4D100C8C3B0 /* Taco TallyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Taco TallyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41216AF22571B4D100C8C3B0 /* Taco_TallyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taco_TallyUITests.swift; sourceTree = "<group>"; };
+		41216AF42571B4D100C8C3B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41216B162571B5BC00C8C3B0 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		41216B1B2571B5EF00C8C3B0 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
+		41216B202571B67D00C8C3B0 /* LeaderboardTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTab.swift; sourceTree = "<group>"; };
+		41216B252571B69B00C8C3B0 /* HistoryTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTab.swift; sourceTree = "<group>"; };
+		41216B2A2571B6B400C8C3B0 /* ProfileTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTab.swift; sourceTree = "<group>"; };
+		41216B302571BABD00C8C3B0 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		41415E892571D8350004B8F9 /* IntAbrreviations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntAbrreviations.swift; sourceTree = "<group>"; };
+		414504A825720D7C001E664F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		414D9ADD2572721800A1C522 /* myProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myProfileModel.swift; sourceTree = "<group>"; };
+		414D9AE2257272D800A1C522 /* UploadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImage.swift; sourceTree = "<group>"; };
+		414D9AE72572734E00A1C522 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		414D9AF82572749F00A1C522 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		414D9B1A2572797900A1C522 /* Taco Tally.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Taco Tally.entitlements"; sourceTree = "<group>"; };
+		414D9B3725727DFF00A1C522 /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
+		414D9B4E25727F1900A1C522 /* AlertViewB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewB.swift; sourceTree = "<group>"; };
+		4156C5DD2572A3D000AF9A6E /* createUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createUser.swift; sourceTree = "<group>"; };
+		4156C5DE2572A3D000AF9A6E /* CheckUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUser.swift; sourceTree = "<group>"; };
+		4156C6082572A8AF00AF9A6E /* AccountCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCreation.swift; sourceTree = "<group>"; };
+		4156C60D2572A8D200AF9A6E /* Indicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
+		4156C6122572A92000AF9A6E /* LoginAccountCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAccountCreation.swift; sourceTree = "<group>"; };
+		5AB1CCEDDB3F2F697C4DA129 /* Pods_Taco_Tally.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Taco_Tally.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9FD702CEE996896E7E902CE /* Pods-Taco Tally.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taco Tally.release.xcconfig"; path = "Target Support Files/Pods-Taco Tally/Pods-Taco Tally.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		41216ACF2571B4CE00C8C3B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB59E825E0561DFDB2F0C230 /* Pods_Taco_Tally.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41216AE02571B4D100C8C3B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41216AEB2571B4D100C8C3B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28721103B7FE08FB0A6C4B9E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5AB1CCEDDB3F2F697C4DA129 /* Pods_Taco_Tally.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41216AC92571B4CE00C8C3B0 = {
+			isa = PBXGroup;
+			children = (
+				41216AD42571B4CE00C8C3B0 /* Taco Tally */,
+				41216AE62571B4D100C8C3B0 /* Taco TallyTests */,
+				41216AF12571B4D100C8C3B0 /* Taco TallyUITests */,
+				41216AD32571B4CE00C8C3B0 /* Products */,
+				5F51CDA6AE3D34ADF1DA2A36 /* Pods */,
+				28721103B7FE08FB0A6C4B9E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		41216AD32571B4CE00C8C3B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41216AD22571B4CE00C8C3B0 /* Taco Tally.app */,
+				41216AE32571B4D100C8C3B0 /* Taco TallyTests.xctest */,
+				41216AEE2571B4D100C8C3B0 /* Taco TallyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41216AD42571B4CE00C8C3B0 /* Taco Tally */ = {
+			isa = PBXGroup;
+			children = (
+				414D9B1A2572797900A1C522 /* Taco Tally.entitlements */,
+				41216AD52571B4CE00C8C3B0 /* Taco_TallyApp.swift */,
+				41216AD72571B4CE00C8C3B0 /* ContentView.swift */,
+				41216B162571B5BC00C8C3B0 /* CustomTabBar.swift */,
+				41216B1B2571B5EF00C8C3B0 /* HomeTab.swift */,
+				41216B202571B67D00C8C3B0 /* LeaderboardTab.swift */,
+				41216B252571B69B00C8C3B0 /* HistoryTab.swift */,
+				41216B2A2571B6B400C8C3B0 /* ProfileTab.swift */,
+				414D9B3025727D2000A1C522 /* Login */,
+				41216B2F2571BA9800C8C3B0 /* Model */,
+				41216AD92571B4D000C8C3B0 /* Assets.xcassets */,
+				414504A825720D7C001E664F /* GoogleService-Info.plist */,
+				41216ADE2571B4D000C8C3B0 /* Info.plist */,
+				41216ADB2571B4D000C8C3B0 /* Preview Content */,
+			);
+			path = "Taco Tally";
+			sourceTree = "<group>";
+		};
+		41216ADB2571B4D000C8C3B0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				41216ADC2571B4D000C8C3B0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		41216AE62571B4D100C8C3B0 /* Taco TallyTests */ = {
+			isa = PBXGroup;
+			children = (
+				41216AE72571B4D100C8C3B0 /* Taco_TallyTests.swift */,
+				41216AE92571B4D100C8C3B0 /* Info.plist */,
+			);
+			path = "Taco TallyTests";
+			sourceTree = "<group>";
+		};
+		41216AF12571B4D100C8C3B0 /* Taco TallyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				41216AF22571B4D100C8C3B0 /* Taco_TallyUITests.swift */,
+				41216AF42571B4D100C8C3B0 /* Info.plist */,
+			);
+			path = "Taco TallyUITests";
+			sourceTree = "<group>";
+		};
+		41216B2F2571BA9800C8C3B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4156C6082572A8AF00AF9A6E /* AccountCreation.swift */,
+				414D9B4E25727F1900A1C522 /* AlertViewB.swift */,
+				414D9B3725727DFF00A1C522 /* Countries.swift */,
+				41216B302571BABD00C8C3B0 /* Users.swift */,
+				41415E892571D8350004B8F9 /* IntAbrreviations.swift */,
+				414D9ADD2572721800A1C522 /* myProfileModel.swift */,
+				414D9AE2257272D800A1C522 /* UploadImage.swift */,
+				414D9AE72572734E00A1C522 /* ImagePicker.swift */,
+				4156C60D2572A8D200AF9A6E /* Indicator.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		414D9B3025727D2000A1C522 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				414D9AF82572749F00A1C522 /* Login.swift */,
+				4156C6122572A92000AF9A6E /* LoginAccountCreation.swift */,
+				4156C5DE2572A3D000AF9A6E /* CheckUser.swift */,
+				4156C5DD2572A3D000AF9A6E /* createUser.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5F51CDA6AE3D34ADF1DA2A36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				295D7709C62D7D1FB690A83D /* Pods-Taco Tally.debug.xcconfig */,
+				E9FD702CEE996896E7E902CE /* Pods-Taco Tally.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		41216AD12571B4CE00C8C3B0 /* Taco Tally */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41216AF72571B4D100C8C3B0 /* Build configuration list for PBXNativeTarget "Taco Tally" */;
+			buildPhases = (
+				8473F6C2E171E8A50AC031E4 /* [CP] Check Pods Manifest.lock */,
+				41216ACE2571B4CE00C8C3B0 /* Sources */,
+				41216ACF2571B4CE00C8C3B0 /* Frameworks */,
+				41216AD02571B4CE00C8C3B0 /* Resources */,
+				B4FB89908C633FAFD4A2041B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Taco Tally";
+			productName = "Taco Tally";
+			productReference = 41216AD22571B4CE00C8C3B0 /* Taco Tally.app */;
+			productType = "com.apple.product-type.application";
+		};
+		41216AE22571B4D100C8C3B0 /* Taco TallyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41216AFA2571B4D100C8C3B0 /* Build configuration list for PBXNativeTarget "Taco TallyTests" */;
+			buildPhases = (
+				41216ADF2571B4D100C8C3B0 /* Sources */,
+				41216AE02571B4D100C8C3B0 /* Frameworks */,
+				41216AE12571B4D100C8C3B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41216AE52571B4D100C8C3B0 /* PBXTargetDependency */,
+			);
+			name = "Taco TallyTests";
+			productName = "Taco TallyTests";
+			productReference = 41216AE32571B4D100C8C3B0 /* Taco TallyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		41216AED2571B4D100C8C3B0 /* Taco TallyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41216AFD2571B4D100C8C3B0 /* Build configuration list for PBXNativeTarget "Taco TallyUITests" */;
+			buildPhases = (
+				41216AEA2571B4D100C8C3B0 /* Sources */,
+				41216AEB2571B4D100C8C3B0 /* Frameworks */,
+				41216AEC2571B4D100C8C3B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41216AF02571B4D100C8C3B0 /* PBXTargetDependency */,
+			);
+			name = "Taco TallyUITests";
+			productName = "Taco TallyUITests";
+			productReference = 41216AEE2571B4D100C8C3B0 /* Taco TallyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		41216ACA2571B4CE00C8C3B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					41216AD12571B4CE00C8C3B0 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					41216AE22571B4D100C8C3B0 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 41216AD12571B4CE00C8C3B0;
+					};
+					41216AED2571B4D100C8C3B0 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 41216AD12571B4CE00C8C3B0;
+					};
+				};
+			};
+			buildConfigurationList = 41216ACD2571B4CE00C8C3B0 /* Build configuration list for PBXProject "Taco Tally" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 41216AC92571B4CE00C8C3B0;
+			productRefGroup = 41216AD32571B4CE00C8C3B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				41216AD12571B4CE00C8C3B0 /* Taco Tally */,
+				41216AE22571B4D100C8C3B0 /* Taco TallyTests */,
+				41216AED2571B4D100C8C3B0 /* Taco TallyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		41216AD02571B4CE00C8C3B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41216ADD2571B4D000C8C3B0 /* Preview Assets.xcassets in Resources */,
+				41216ADA2571B4D000C8C3B0 /* Assets.xcassets in Resources */,
+				414504A925720D7C001E664F /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41216AE12571B4D100C8C3B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41216AEC2571B4D100C8C3B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8473F6C2E171E8A50AC031E4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Taco Tally-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4FB89908C633FAFD4A2041B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Taco Tally/Pods-Taco Tally-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Taco Tally/Pods-Taco Tally-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Taco Tally/Pods-Taco Tally-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		41216ACE2571B4CE00C8C3B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41216B312571BABD00C8C3B0 /* Users.swift in Sources */,
+				414D9B4F25727F1900A1C522 /* AlertViewB.swift in Sources */,
+				4156C6092572A8AF00AF9A6E /* AccountCreation.swift in Sources */,
+				41216B262571B69B00C8C3B0 /* HistoryTab.swift in Sources */,
+				41415E8A2571D8360004B8F9 /* IntAbrreviations.swift in Sources */,
+				414D9B3825727DFF00A1C522 /* Countries.swift in Sources */,
+				4156C5E02572A3D000AF9A6E /* CheckUser.swift in Sources */,
+				41216B1C2571B5EF00C8C3B0 /* HomeTab.swift in Sources */,
+				41216AD82571B4CE00C8C3B0 /* ContentView.swift in Sources */,
+				414D9AE3257272D800A1C522 /* UploadImage.swift in Sources */,
+				4156C6132572A92000AF9A6E /* LoginAccountCreation.swift in Sources */,
+				4156C60E2572A8D200AF9A6E /* Indicator.swift in Sources */,
+				41216B2B2571B6B400C8C3B0 /* ProfileTab.swift in Sources */,
+				41216B172571B5BC00C8C3B0 /* CustomTabBar.swift in Sources */,
+				414D9ADE2572721800A1C522 /* myProfileModel.swift in Sources */,
+				414D9AE82572734E00A1C522 /* ImagePicker.swift in Sources */,
+				41216AD62571B4CE00C8C3B0 /* Taco_TallyApp.swift in Sources */,
+				41216B212571B67D00C8C3B0 /* LeaderboardTab.swift in Sources */,
+				414D9AFA2572749F00A1C522 /* Login.swift in Sources */,
+				4156C5DF2572A3D000AF9A6E /* createUser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41216ADF2571B4D100C8C3B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41216AE82571B4D100C8C3B0 /* Taco_TallyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41216AEA2571B4D100C8C3B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41216AF32571B4D100C8C3B0 /* Taco_TallyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		41216AE52571B4D100C8C3B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41216AD12571B4CE00C8C3B0 /* Taco Tally */;
+			targetProxy = 41216AE42571B4D100C8C3B0 /* PBXContainerItemProxy */;
+		};
+		41216AF02571B4D100C8C3B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41216AD12571B4CE00C8C3B0 /* Taco Tally */;
+			targetProxy = 41216AEF2571B4D100C8C3B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		41216AF52571B4D100C8C3B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		41216AF62571B4D100C8C3B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		41216AF82571B4D100C8C3B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 295D7709C62D7D1FB690A83D /* Pods-Taco Tally.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Taco Tally/Taco Tally.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Taco Tally/Preview Content\"";
+				DEVELOPMENT_TEAM = U2Y9896QA2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Taco Tally/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cmallbiz.Taco-Tally";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		41216AF92571B4D100C8C3B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9FD702CEE996896E7E902CE /* Pods-Taco Tally.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Taco Tally/Taco Tally.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Taco Tally/Preview Content\"";
+				DEVELOPMENT_TEAM = U2Y9896QA2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Taco Tally/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cmallbiz.Taco-Tally";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		41216AFB2571B4D100C8C3B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U2Y9896QA2;
+				INFOPLIST_FILE = "Taco TallyTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cmallbiz.Taco-Tally.Taco-TallyTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taco Tally.app/Taco Tally";
+			};
+			name = Debug;
+		};
+		41216AFC2571B4D100C8C3B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U2Y9896QA2;
+				INFOPLIST_FILE = "Taco TallyTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cmallbiz.Taco-Tally.Taco-TallyTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taco Tally.app/Taco Tally";
+			};
+			name = Release;
+		};
+		41216AFE2571B4D100C8C3B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U2Y9896QA2;
+				INFOPLIST_FILE = "Taco TallyUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cmallbiz.Taco-Tally.Taco-TallyUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Taco Tally";
+			};
+			name = Debug;
+		};
+		41216AFF2571B4D100C8C3B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U2Y9896QA2;
+				INFOPLIST_FILE = "Taco TallyUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cmallbiz.Taco-Tally.Taco-TallyUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Taco Tally";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		41216ACD2571B4CE00C8C3B0 /* Build configuration list for PBXProject "Taco Tally" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41216AF52571B4D100C8C3B0 /* Debug */,
+				41216AF62571B4D100C8C3B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41216AF72571B4D100C8C3B0 /* Build configuration list for PBXNativeTarget "Taco Tally" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41216AF82571B4D100C8C3B0 /* Debug */,
+				41216AF92571B4D100C8C3B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41216AFA2571B4D100C8C3B0 /* Build configuration list for PBXNativeTarget "Taco TallyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41216AFB2571B4D100C8C3B0 /* Debug */,
+				41216AFC2571B4D100C8C3B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41216AFD2571B4D100C8C3B0 /* Build configuration list for PBXNativeTarget "Taco TallyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41216AFE2571B4D100C8C3B0 /* Debug */,
+				41216AFF2571B4D100C8C3B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 41216ACA2571B4CE00C8C3B0 /* Project object */;
+}
