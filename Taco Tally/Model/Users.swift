@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 import Firebase
 
-struct UserModel {
+struct UserModel :Codable{
     
     var uid : String
-    var profileImage : String
-    var username: String
-    var firstName: String
-    var lastName: String
-    var bio : String
-    var tacoCount: Int
-    var hometown: String
+    var pic : String?
+    var username: String?
+    var firstName: String?
+    var lastName: String?
+    var about : String?
+    var tacoCount: Int?
+    var hometown: String?
     
 }
 
@@ -41,7 +41,7 @@ func fetchUser(uid: String,completion: @escaping (UserModel) -> ()){
         let tacoCount = user.data()?["tacoCount"] as! Int
         
         DispatchQueue.main.async {
-            completion(UserModel(uid: uid, profileImage: pic, username: username, firstName: firstName, lastName: lastName, bio: bio, tacoCount: tacoCount, hometown: hometown))
+            completion(UserModel(uid: uid, pic: pic, username: username, firstName: firstName, lastName: lastName, about: bio, tacoCount: tacoCount, hometown: hometown))
         }
     }
 }

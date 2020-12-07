@@ -9,38 +9,88 @@ import Foundation
 import SwiftUI
 import Firebase
 import SDWebImageSwiftUI
+import CodableFirebase
 
 struct Leaderboard : View {
     
+    let ref = Firestore.firestore()
+    @State var topThreeUsers = [UserModel]()
+    @State var firstAppear: Bool = true
+    
     var body: some View{
+        TopScrollView(topThreeUsers: $topThreeUsers)
+            .onAppear(perform: {
+                if !self.firstAppear { return }
+                fetchTopThree()
+                self.firstAppear = false
+            })
+    }
+    
+    func fetchTopThree(){
+        let usersColl = self.ref.collection("users")
+        let query = usersColl
+            .order(by: "tacoCount", descending: true)
+            .limit(to: 3)
         
-        TopScrollView()
-        
+        query.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
+            }
+            if let snap = querySnapshot {
+                if snap.count > 0 {
+                    
+                    for document in snap.documents {
+                        do {
+                            let userData = try FirestoreDecoder().decode(UserModel.self, from: document.data())
+                            print(userData)
+                            self.topThreeUsers.append(userData)
+                        }catch {
+                            print(error.localizedDescription)
+                        }
+                        let key = document.documentID
+                        print("TopTacoCount: \(key) ")
+                    }
+                } else {
+                    print("no TopTacoCount fount")
+                }
+            } else {
+                print("no data returned")
+            }
+        }
     }
 }
 
 struct TopScrollView: View {
     
     @StateObject var myProfileData = myProfileModel()
+     
+    @Binding var topThreeUsers : [UserModel]
     
     var body: some View {
+        
         VStack {
             Text("Leaderboard")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
             HStack() {
-
-                FirstPlaceView()
-
-                SecondPlaceView()
-                    .padding(.leading, 40)
-
-                ThirdPlaceView()
-                    .padding(.leading, 30)
-
+                if topThreeUsers.indices.contains(0){
+                    FirstPlaceView(firstPlaceUserObject: $topThreeUsers[0])
+                }
+                
+                if topThreeUsers.indices.contains(1){
+                    SecondPlaceView(secondPlaceUserObject: $topThreeUsers[1])
+                        .padding(.leading, 30)
+                }
+                
+                if topThreeUsers.indices.contains(2){
+                    ThirdPlaceView(secondPlaceUserObject: $topThreeUsers[2])
+                        .padding(.leading, 30)
+                }
+                
             }.padding(10)
             
-            FollowBackView(image: myProfileData.userInfo.profileImage, username: myProfileData.userInfo.username, time: myProfileData.userInfo.tacoCount, hometown: myProfileData.userInfo.hometown)
+            FollowBackView(image: myProfileData.userInfo.pic ?? "", username: myProfileData.userInfo.username ?? "", time: myProfileData.userInfo.tacoCount ?? 0, hometown: myProfileData.userInfo.hometown ?? "")
                 .padding([.leading, .trailing], 10)
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color.white)
@@ -50,9 +100,15 @@ struct TopScrollView: View {
             LeaderboardBottomView()
             
             Spacer()
+        }.onAppear{
+            //            DispatchQueue.main.async {
+            //                self.fetchTopThree()
+            //            }
+            
         }
         
     }
+      
 }
 
 struct LeaderboardBottomView : View {
@@ -127,11 +183,11 @@ struct LeaderboardBottomView : View {
                                     }
                                     // Masking View...
                                     .mask(
-                                    
+                                        
                                         Rectangle()
                                             .fill(Color.white.opacity(0.6))
                                             .rotationEffect(.init(degrees: 70))
-                                        // Moving View....
+                                            // Moving View....
                                             .offset(x: i.show ? 1000 : -350)
                                     )
                                 }
@@ -146,7 +202,7 @@ struct LeaderboardBottomView : View {
                                         if self.data.last!.id == i.id{
                                             
                                             GeometryReader{g in
-  
+                                                
                                                 HStack(spacing: 15){
                                                     
                                                     FollowBackView(image: "\(i.profileImage)", username: "\(i.userName)", time: i.tacoCount, hometown: "\(i.hometown)")
@@ -172,20 +228,20 @@ struct LeaderboardBottomView : View {
                                         }
                                         else{
                                             
-//                                            HStack(spacing: 15){
-//
-//                                                WebImage(url: URL(string: i.profileImage)!)
-//                                                .resizable()
-//                                                .frame(width: 75, height: 75)
-//                                                .clipShape(Circle())
-//
-//                                                VStack(alignment: .leading, spacing: 12) {
-//
-//                                                    Text(i.name)
-//                                                }
-//
-//                                                Spacer(minLength: 0)
-//                                            }
+                                            //                                            HStack(spacing: 15){
+                                            //
+                                            //                                                WebImage(url: URL(string: i.profileImage)!)
+                                            //                                                .resizable()
+                                            //                                                .frame(width: 75, height: 75)
+                                            //                                                .clipShape(Circle())
+                                            //
+                                            //                                                VStack(alignment: .leading, spacing: 12) {
+                                            //
+                                            //                                                    Text(i.name)
+                                            //                                                }
+                                            //
+                                            //                                                Spacer(minLength: 0)
+                                            //                                            }
                                             FollowBackView(image: "\(i.profileImage)", username: i.userName, time: i.tacoCount, hometown: i.hometown)
                                         }
                                     }
@@ -221,7 +277,7 @@ struct LeaderboardBottomView : View {
         for i in 0...19{
             
             let temp = Card(id: "\(i)", firstName: "", show: false, profileImage: "", userName: "", tacoCount: 0, hometown: "")
-                        
+            
             self.data.append(temp)
             
             // Enabling Animation..
@@ -271,7 +327,7 @@ struct LeaderboardBottomView : View {
         // Adding Loading Shimmer Card...
         
         self.data.append(Card(id: "\(self.data.count)", firstName: "", show: false, profileImage: "", userName: "", tacoCount: 0, hometown: ""))
-                
+        
         withAnimation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false)){
             
             self.data[self.data.count - 1].show.toggle()
@@ -334,7 +390,7 @@ struct CommentView: View {
     var username: String
     var comment: String
     var post: String
-
+    
     var body: some View {
         HStack(alignment: .top) {
             
@@ -363,36 +419,36 @@ struct CommentView: View {
                     }
                 }
             }
-
+            
             VStack(alignment: .leading) {
                 Text("Hey \(username)!")
                     .font(.system(size: 17, weight: .bold))
-
+                
                 HStack(alignment: .bottom) {
                     Text(comment)
                         .font(.system(size: 14, weight: .bold))
                         .foregroundColor(.gray)
                 }
-
-//                HStack {
-//                    Button(action: {}, label: {
-//                        Image(systemName: "heart")
-//                            .font(.system(size: 19, weight: .bold))
-//                            .foregroundColor(.gray)
-//                    })
-//
-//                    Button(action: {}, label: {
-//                        Image(systemName: "ellipsis.bubble")
-//                            .font(.system(size: 19, weight: .bold))
-//                            .foregroundColor(.gray)
-//                            .padding(.leading, 8)
-//                    })
-//                }
-//                .padding(.top, 8)
+                
+                //                HStack {
+                //                    Button(action: {}, label: {
+                //                        Image(systemName: "heart")
+                //                            .font(.system(size: 19, weight: .bold))
+                //                            .foregroundColor(.gray)
+                //                    })
+                //
+                //                    Button(action: {}, label: {
+                //                        Image(systemName: "ellipsis.bubble")
+                //                            .font(.system(size: 19, weight: .bold))
+                //                            .foregroundColor(.gray)
+                //                            .padding(.leading, 8)
+                //                    })
+                //                }
+                //                .padding(.top, 8)
             }
-
+            
             Spacer()
-
+            
             Image("tt_logo")
                 .resizable()
                 .scaledToFill()
@@ -414,109 +470,100 @@ struct FollowBackView: View {
     var username: String
     var time: Int
     var hometown: String
-
+    
     var body: some View {
         
         ZStack(alignment: .topLeading) {
-        
-        HStack {
-            Button(action: {}, label: {
-                
-                if image != ""{
+            
+            HStack {
+                Button(action: {}, label: {
                     
-                    ZStack{
+                    if image != ""{
                         
-                        WebImage(url: URL(string: image)!)
-        //                Image(image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 50, height: 50, alignment: .top)
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                            .clipShape(RoundedRectangle(cornerRadius: 26))
-                            .padding(6)
-                            .background(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9868244529, green: 0.5855258107, blue: 0.09304409474, alpha: 1)), Color(#colorLiteral(red: 0.7633709311, green: 0.1634711623, blue: 0.7447224855, alpha: 1))]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
-                                    .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
-                            )
-                        
-                        if myProfileData.isLoading{
+                        ZStack{
                             
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
+                            WebImage(url: URL(string: image)!)
+                                //                Image(image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50, alignment: .top)
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                                .clipShape(RoundedRectangle(cornerRadius: 26))
+                                .padding(6)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9868244529, green: 0.5855258107, blue: 0.09304409474, alpha: 1)), Color(#colorLiteral(red: 0.7633709311, green: 0.1634711623, blue: 0.7447224855, alpha: 1))]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
+                                        .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
+                                )
+                            
+                            if myProfileData.isLoading{
+                                
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
+                            }
                         }
                     }
-                }
-            })
-
-            VStack(alignment: .leading) {
-                Text(username)
-                    .font(.system(size: 17, weight: .bold))
+                })
                 
-                Text(hometown)
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundColor(.gray)
-
-//                HStack(alignment: .bottom) {
-//                    Text(hometown)
-//                        .font(.system(size: 15, weight: .bold))
-//                        .foregroundColor(.gray)
-//
-//                    Text(time)
-//                        .font(.system(size: 13))
-//                        .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
-//                }
-            }
-
-            Spacer()
-
-            Text("\(time)")
-                .padding(8)
-                .font(.system(size: 15, weight: .bold))
-                .frame(width: 115, height: 50)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .clipShape(Capsule())
-            
-        }
-        .padding(8)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 30))
-            
-        RoundedRectangle(cornerRadius: 12)
-            .frame(width: 30, height: 30)
-            .foregroundColor(Color(#colorLiteral(red: 0.9311559796, green: 0.008160683326, blue: 0.3113113642, alpha: 1)))
-            .overlay(
-                Text("1st")
-                    .font(.system(size: 15, weight: .medium))
+                VStack(alignment: .leading) {
+                    Text(username)
+                        .font(.system(size: 17, weight: .bold))
+                    
+                    Text(hometown)
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(.gray)
+                    
+                    //                HStack(alignment: .bottom) {
+                    //                    Text(hometown)
+                    //                        .font(.system(size: 15, weight: .bold))
+                    //                        .foregroundColor(.gray)
+                    //
+                    //                    Text(time)
+                    //                        .font(.system(size: 13))
+                    //                        .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
+                    //                }
+                }
+                
+                Spacer()
+                
+                Text("\(time)")
+                    .padding(8)
+                    .font(.system(size: 15, weight: .bold))
+                    .frame(width: 115, height: 50)
+                    .background(Color.blue)
                     .foregroundColor(.white)
-            ).offset(x: 10, y: -10)
+                    .clipShape(Capsule())
+                
+            }
+            .padding(8)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 30))
+            
+            RoundedRectangle(cornerRadius: 12)
+                .frame(width: 30, height: 30)
+                .foregroundColor(Color(#colorLiteral(red: 0.9311559796, green: 0.008160683326, blue: 0.3113113642, alpha: 1)))
+                .overlay(
+                    Text("1st")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(.white)
+                ).offset(x: 10, y: -10)
         }
     }
 }
 
 struct FirstPlaceView: View {
-    var myProfileData = myProfileModel()
-
-    @State var profileImage : String = ""
-    var username: String = "cbluford"
-    var firstName: String = ""
-    var lastName: String = ""
-    var bio : String = ""
-    var tacoCount: Int = 0
-    var hometown: String = ""
-    var placeLevel: String = "1st"
-
+    @Binding var firstPlaceUserObject : UserModel
+    @State var isLoading = false
+    
     var body: some View {
-        
         VStack {
-
-            if profileImage != ""{
-
+            
+            if firstPlaceUserObject.pic != ""{
+                
                 ZStack(alignment: .topTrailing) {
-
-                    WebImage(url: URL(string: profileImage)!)
+                    
+                    WebImage(url: URL(string: firstPlaceUserObject.pic ?? ""))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 55, height: 55, alignment: .top)
@@ -525,9 +572,9 @@ struct FirstPlaceView: View {
                         .clipShape(Circle())
                         .padding(6)
                         .background(
-                    Circle()
-                        .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color("gold1"), Color("gold2")]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
+                            Circle()
+                                .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color("gold1"), Color("gold2")]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
+                                .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
                         )
                     RoundedRectangle(cornerRadius: 12)
                         .frame(width: 30, height: 30)
@@ -537,18 +584,17 @@ struct FirstPlaceView: View {
                                 .font(.system(size: 15, weight: .medium))
                                 .foregroundColor(.white)
                         ).offset(x: 10, y: -10)
-                if myProfileData.isLoading{
-
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
+                    if self.isLoading{
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
                     }
                 }
             }
-
-            Text("Tumani")
+            
+            Text(firstPlaceUserObject.username ?? "")
                 .font(.system(size: 16, weight: .bold))
-
-            Text("\(5730.roundedWithAbbreviations)")
+            
+            Text("\((firstPlaceUserObject.tacoCount ?? 0).roundedWithAbbreviations)")
                 .font(.system(size: 16, weight: .medium))
         }
         .padding([.top, .bottom],12)
@@ -557,52 +603,26 @@ struct FirstPlaceView: View {
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width / 4)
         )
-
-        .onAppear {
-            updateTacoCount()
-        }
-    }
-    func updateTacoCount() {
-        let ref = Firestore.firestore()
-        let uid = Auth.auth().currentUser!.uid
         
-        ref.collection("users").document(uid).addSnapshotListener { (documentSnapshot, error) in
-              guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
-                return
-              }
-                guard let data = document.data() else {
-                print("Document data was empty.")
-                    return
-              }
-            self.profileImage = data["pic"] as? String ?? ""
-            return
-            }
+        
     }
+    
 }
 
 struct SecondPlaceView: View {
-
-    @ObservedObject private var myProfileData = myProfileModel()
-
-    @State var profileImage : String = ""
-    var username: String = ""
-    var firstName: String = ""
-    var lastName: String = ""
-    var bio : String = ""
-    var tacoCount: Int = 0
-    var hometown: String = ""
-    var placeLevel: String = "2nd"
-
+    
+    @Binding var secondPlaceUserObject : UserModel
+    @State var isLoading = false
+    
     var body: some View {
-
+        
         VStack {
-
-            if profileImage != ""{
-
+            
+            if secondPlaceUserObject.pic != ""{
+                
                 ZStack(alignment: .topTrailing) {
-
-                    WebImage(url: URL(string: profileImage)!)
+                    
+                    WebImage(url: URL(string: secondPlaceUserObject.pic ?? ""))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 55, height: 55, alignment: .top)
@@ -611,9 +631,9 @@ struct SecondPlaceView: View {
                         .clipShape(Circle())
                         .padding(6)
                         .background(
-                    Circle()
-                        .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color("silver1"), Color("silver2")]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
+                            Circle()
+                                .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color("silver1"), Color("silver2")]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
+                                .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
                         )
                     RoundedRectangle(cornerRadius: 12)
                         .frame(width: 30, height: 30)
@@ -623,18 +643,17 @@ struct SecondPlaceView: View {
                                 .font(.system(size: 15, weight: .medium))
                                 .foregroundColor(.white)
                         ).offset(x: 10, y: -10)
-                if myProfileData.isLoading{
-
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
+                    if self.isLoading{
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
                     }
                 }
             }
-
-            Text("Walter")
+            
+            Text(self.secondPlaceUserObject.username ?? "")
                 .font(.system(size: 16, weight: .bold))
-
-            Text("\(4830.roundedWithAbbreviations)")
+            
+            Text("\((secondPlaceUserObject.tacoCount ?? 0).roundedWithAbbreviations)")
                 .font(.system(size: 16, weight: .medium))
         }
         .padding([.top, .bottom],12)
@@ -643,52 +662,25 @@ struct SecondPlaceView: View {
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width / 4)
         )
-
-        .onAppear {
-            updateTacoCount()
-        }
-    }
-    func updateTacoCount() {
-        let ref = Firestore.firestore()
-        let uid = Auth.auth().currentUser!.uid
         
-        ref.collection("users").document(uid).addSnapshotListener { (documentSnapshot, error) in
-              guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
-                return
-              }
-                guard let data = document.data() else {
-                print("Document data was empty.")
-                    return
-              }
-            self.profileImage = data["pic"] as? String ?? ""
-            return
-            }
     }
+    
 }
 
 struct ThirdPlaceView: View {
-
-    @ObservedObject private var myProfileData = myProfileModel()
-
-    @State var profileImage : String = ""
-    var username: String = ""
-    var firstName: String = ""
-    var lastName: String = ""
-    var bio : String = ""
-    var tacoCount: Int = 0
-    var hometown: String = ""
-    var placeLevel: String = "3rd"
-
+    
+    @Binding var secondPlaceUserObject : UserModel
+    @State var isLoading = false
+    
     var body: some View {
-
+        
         VStack {
-
-            if profileImage != ""{
-
+            
+            if secondPlaceUserObject.pic != ""{
+                
                 ZStack(alignment: .topTrailing) {
-
-                    WebImage(url: URL(string: profileImage)!)
+                    
+                    WebImage(url: URL(string: secondPlaceUserObject.pic ?? ""))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 55, height: 55, alignment: .top)
@@ -697,9 +689,9 @@ struct ThirdPlaceView: View {
                         .clipShape(Circle())
                         .padding(6)
                         .background(
-                    Circle()
-                        .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color("bronze1"), Color("bronze2")]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
+                            Circle()
+                                .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color("bronze1"), Color("bronze2")]), startPoint: .bottom, endPoint: .top), lineWidth: 3)
+                                .foregroundColor(Color(#colorLiteral(red: 0.9389725327, green: 0.9531454444, blue: 0.9702789187, alpha: 1)))
                         )
                     RoundedRectangle(cornerRadius: 12)
                         .frame(width: 30, height: 30)
@@ -709,19 +701,19 @@ struct ThirdPlaceView: View {
                                 .font(.system(size: 15, weight: .medium))
                                 .foregroundColor(.white)
                         ).offset(x: 10, y: -10)
-                if myProfileData.isLoading{
-
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
+                    if self.isLoading{
+                        
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color("blue")))
                     }
                 }
             }
-
-            Text("Username")
+            
+            Text(secondPlaceUserObject.username ?? "")
                 .font(.system(size: 16, weight: .bold))
                 .lineLimit(1)
-
-            Text("\(4630.roundedWithAbbreviations)")
+            
+            Text("\((secondPlaceUserObject.tacoCount ?? 0).roundedWithAbbreviations)")
                 .font(.system(size: 16, weight: .medium))
         }
         .padding([.top, .bottom],12)
@@ -730,49 +722,7 @@ struct ThirdPlaceView: View {
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width / 4)
         )
-        .onAppear {
-            updateTacoCount()
-        }
     }
-    func updateTacoCount() {
-        let ref = Firestore.firestore()
-        let uid = Auth.auth().currentUser!.uid
-        
-        ref.collection("users").document(uid).addSnapshotListener { (documentSnapshot, error) in
-              guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
-                return
-              }
-                guard let data = document.data() else {
-                print("Document data was empty.")
-                    return
-              }
-            self.profileImage = data["pic"] as? String ?? ""
-            return
-            }
-    }
+    
 }
 
-//func fetchTopThree() {
-//
-//        ref.collection("users").addSnapshotListener { (querySnapshot, error) in
-//            guard let documents = querySnapshot?.documents else {
-//                print("Error fetching document: \(error!)")
-//                return
-//              }
-//            self.top3 = documents.map { (queryDocumentSnapshot) -> PlaceView in
-//                let data = queryDocumentSnapshot.data()
-//
-//                let uid = data["uid"] as? String ?? ""
-//                let profileImage = data["pic"] as? String ?? ""
-//                let username = data["username"] as? String ?? ""
-//                let firstName = data["First Name"] as? String ?? ""
-//                let lastName = data["Last Name"] as? String ?? ""
-//                let bio = data["about"] as? String ?? ""
-//                let hometown = data["hometown"] as? String ?? ""
-//                let tacoCount = data["tacoCount"] as? Int ?? 0
-//
-//                return PlaceView(profileImage: profileImage, username: username, firstName: firstName, lastName: lastName, bio: bio, tacoCount: tacoCount, hometown: hometown)
-//            }
-//        }
-//}

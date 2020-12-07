@@ -13,6 +13,6 @@ target 'Taco Tally' do
    pod 'Firebase'
    pod 'Firebase/Firestore'
    pod 'SDWebImageSwiftUI'
-
+   pod 'CodableFirebase'
    
 end

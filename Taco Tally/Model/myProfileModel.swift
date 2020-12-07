@@ -11,7 +11,7 @@ import Firebase
 
 class myProfileModel : ObservableObject{
     
-    @Published var userInfo = UserModel(uid: "", profileImage: "", username: "", firstName: "", lastName: "", bio: "", tacoCount: 0, hometown: "")
+    @Published var userInfo = UserModel(uid: "", pic: "", username: "", firstName: "", lastName: "", about: "", tacoCount: 0, hometown: "")
     @AppStorage("current_status") var status = false
     
     // Image Picker For Updating Image...

@@ -1,0 +1,6 @@
+framework module Pods_Taco_Tally {
+  umbrella header "Pods-Taco Tally-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -35,15 +35,14 @@ struct Login : View {
                 .padding(.top, 12)
             
             HStack{
-                
                 TextField("+1", text: $ccode)
-                    .keyboardType(.numberPad)
+//                    .keyboardType(.numberPad)
                     .frame(width: 45)
                     .padding()
                     .background(Color("Color"))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .keyboardType(.phonePad)
                    
-                
                 TextField("Number", text: $no)
                     .keyboardType(.numberPad)
                     .padding()
