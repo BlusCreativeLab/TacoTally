@@ -19,6 +19,7 @@ struct Leaderboard : View {
     
     var body: some View{
         TopScrollView(topThreeUsers: $topThreeUsers)
+            
             .onAppear(perform: {
                 if !self.firstAppear { return }
                 fetchTopThree()
@@ -33,14 +34,17 @@ struct Leaderboard : View {
             .limit(to: 3)
         
         query.getDocuments { (querySnapshot, err) in
+            
             if let err = err {
                 print("Error getting documents: \(err)")
                 return
             }
             if let snap = querySnapshot {
+                
                 if snap.count > 0 {
                     
                     for document in snap.documents {
+                        
                         do {
                             let userData = try FirestoreDecoder().decode(UserModel.self, from: document.data())
                             print(userData)
@@ -100,11 +104,6 @@ struct TopScrollView: View {
             LeaderboardBottomView()
             
             Spacer()
-        }.onAppear{
-            //            DispatchQueue.main.async {
-            //                self.fetchTopThree()
-            //            }
-            
         }
         
     }
@@ -227,21 +226,7 @@ struct LeaderboardBottomView : View {
                                             
                                         }
                                         else{
-                                            
-                                            //                                            HStack(spacing: 15){
-                                            //
-                                            //                                                WebImage(url: URL(string: i.profileImage)!)
-                                            //                                                .resizable()
-                                            //                                                .frame(width: 75, height: 75)
-                                            //                                                .clipShape(Circle())
-                                            //
-                                            //                                                VStack(alignment: .leading, spacing: 12) {
-                                            //
-                                            //                                                    Text(i.name)
-                                            //                                                }
-                                            //
-                                            //                                                Spacer(minLength: 0)
-                                            //                                            }
+                                             
                                             FollowBackView(image: "\(i.profileImage)", username: i.userName, time: i.tacoCount, hometown: i.hometown)
                                         }
                                     }
@@ -306,8 +291,9 @@ struct LeaderboardBottomView : View {
             // removing shimmer data...
             
             self.data.removeAll()
-            
-            for i in snap!.documents{
+            //drop first 3
+            let abc = Array(snap!.documents.dropFirst(3))
+            for i in abc{
                 
                 let data = Card(id: i.documentID, firstName: i.get("First Name") as! String, show: false, profileImage: i.get("pic") as! String, userName: i.get("username") as! String, tacoCount: i.get("tacoCount") as! Int, hometown: i.get("hometown") as! String)
                 
@@ -465,7 +451,7 @@ struct CommentView: View {
 struct FollowBackView: View {
     
     @StateObject var myProfileData = myProfileModel()
-    
+//    @Binding var index :Int
     var image: String
     var username: String
     var time: Int
@@ -483,7 +469,6 @@ struct FollowBackView: View {
                         ZStack{
                             
                             WebImage(url: URL(string: image)!)
-                                //                Image(image)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 50, height: 50, alignment: .top)
@@ -513,23 +498,13 @@ struct FollowBackView: View {
                     Text(hometown)
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.gray)
-                    
-                    //                HStack(alignment: .bottom) {
-                    //                    Text(hometown)
-                    //                        .font(.system(size: 15, weight: .bold))
-                    //                        .foregroundColor(.gray)
-                    //
-                    //                    Text(time)
-                    //                        .font(.system(size: 13))
-                    //                        .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
-                    //                }
                 }
                 
                 Spacer()
                 
                 Text("\(time)")
                     .padding(8)
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 12, weight: .bold))
                     .frame(width: 115, height: 50)
                     .background(Color.blue)
                     .foregroundColor(.white)
@@ -541,12 +516,16 @@ struct FollowBackView: View {
             .clipShape(RoundedRectangle(cornerRadius: 30))
             
             RoundedRectangle(cornerRadius: 12)
-                .frame(width: 30, height: 30)
+                .font(.system(size: 11, weight: .medium))
+                .frame(width: 33, height: 30)
                 .foregroundColor(Color(#colorLiteral(red: 0.9311559796, green: 0.008160683326, blue: 0.3113113642, alpha: 1)))
+                .minimumScaleFactor(0.6)
                 .overlay(
-                    Text("1st")
+                    
+                    Text("\(0.returnSuffix() ?? "0th")")
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.white)
+                    
                 ).offset(x: 10, y: -10)
         }
     }
@@ -726,3 +705,11 @@ struct ThirdPlaceView: View {
     
 }
 
+extension Int {
+    func returnSuffix() -> String?{
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        let first = formatter.string(from: NSNumber(value: self))
+        return first
+    }
+}
