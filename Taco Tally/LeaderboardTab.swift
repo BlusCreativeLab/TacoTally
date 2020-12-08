@@ -94,7 +94,7 @@ struct TopScrollView: View {
                 
             }.padding(10)
             
-            FollowBackView(image: myProfileData.userInfo.pic ?? "", username: myProfileData.userInfo.username ?? "", time: myProfileData.userInfo.tacoCount ?? 0, hometown: myProfileData.userInfo.hometown ?? "")
+            FollowBackView(userRank: 0, image: myProfileData.userInfo.pic ?? "", username: myProfileData.userInfo.username ?? "", time: myProfileData.userInfo.tacoCount ?? 0, hometown: myProfileData.userInfo.hometown ?? "")
                 .padding([.leading, .trailing], 10)
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color.white)
@@ -204,7 +204,7 @@ struct LeaderboardBottomView : View {
                                                 
                                                 HStack(spacing: 15){
                                                     
-                                                    FollowBackView(image: "\(i.profileImage)", username: "\(i.userName)", time: i.tacoCount, hometown: "\(i.hometown)")
+                                                    FollowBackView(userRank: i.rank, image: "\(i.profileImage)", username: "\(i.userName)", time: i.tacoCount, hometown: "\(i.hometown)")
                                                 }
                                                 .onAppear{
                                                     
@@ -227,7 +227,7 @@ struct LeaderboardBottomView : View {
                                         }
                                         else{
                                              
-                                            FollowBackView(image: "\(i.profileImage)", username: i.userName, time: i.tacoCount, hometown: i.hometown)
+                                            FollowBackView(userRank: i.rank, image: "\(i.profileImage)", username: i.userName, time: i.tacoCount, hometown: i.hometown)
                                         }
                                     }
                                 }
@@ -258,10 +258,10 @@ struct LeaderboardBottomView : View {
     // Showing Until Data Is Loading...
     
     func loadTempData(){
-        
+        var rankCounter = 3
         for i in 0...19{
-            
-            let temp = Card(id: "\(i)", firstName: "", show: false, profileImage: "", userName: "", tacoCount: 0, hometown: "")
+            rankCounter += 1
+            let temp = Card(id: "\(i)", firstName: "", show: false, profileImage: "", userName: "", tacoCount: 0, hometown: "", rank: rankCounter)
             
             self.data.append(temp)
             
@@ -277,7 +277,7 @@ struct LeaderboardBottomView : View {
     // Loading Data...
     
     func getData(){
-        
+        var rankCounter = 3
         let db = Firestore.firestore()
         // First 20 data....
         db.collection("users").order(by: "tacoCount",descending: true).limit(to: 20).getDocuments { (snap, err) in
@@ -294,8 +294,8 @@ struct LeaderboardBottomView : View {
             //drop first 3
             let abc = Array(snap!.documents.dropFirst(3))
             for i in abc{
-                
-                let data = Card(id: i.documentID, firstName: i.get("First Name") as! String, show: false, profileImage: i.get("pic") as! String, userName: i.get("username") as! String, tacoCount: i.get("tacoCount") as! Int, hometown: i.get("hometown") as! String)
+                rankCounter += 1
+                let data = Card(id: i.documentID, firstName: i.get("First Name") as! String, show: false, profileImage: i.get("pic") as! String, userName: i.get("username") as! String, tacoCount: i.get("tacoCount") as! Int, hometown: i.get("hometown") as! String, rank: rankCounter)
                 
                 self.data.append(data)
             }
@@ -309,10 +309,10 @@ struct LeaderboardBottomView : View {
     // Updating Next 20 Data...
     
     func UpdateData(){
-        
+        var rankCounter = 0
         // Adding Loading Shimmer Card...
         
-        self.data.append(Card(id: "\(self.data.count)", firstName: "", show: false, profileImage: "", userName: "", tacoCount: 0, hometown: ""))
+        self.data.append(Card(id: "\(self.data.count)", firstName: "", show: false, profileImage: "", userName: "", tacoCount: 0, hometown: "", rank: rankCounter))
         
         withAnimation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false)){
             
@@ -340,8 +340,8 @@ struct LeaderboardBottomView : View {
                 if !snap!.documents.isEmpty{
                     
                     for i in snap!.documents{
-                        
-                        let data = Card(id: i.documentID, firstName: i.get("First Name") as! String, show: false, profileImage: i.get("pic") as! String, userName: i.get("username") as! String, tacoCount: i.get("tacoCount") as! Int, hometown: i.get("hometown") as! String)
+                        rankCounter += 1
+                        let data = Card(id: i.documentID, firstName: i.get("First Name") as! String, show: false, profileImage: i.get("pic") as! String, userName: i.get("username") as! String, tacoCount: i.get("tacoCount") as! Int, hometown: i.get("hometown") as! String, rank: rankCounter)
                         
                         self.data.append(data)
                     }
@@ -366,6 +366,7 @@ struct Card : Identifiable {
     var userName: String
     var tacoCount: Int
     var hometown: String
+    var rank:Int
 }
 
 struct CommentView: View {
@@ -451,7 +452,7 @@ struct CommentView: View {
 struct FollowBackView: View {
     
     @StateObject var myProfileData = myProfileModel()
-//    @Binding var index :Int
+    var userRank :Int
     var image: String
     var username: String
     var time: Int
@@ -522,7 +523,7 @@ struct FollowBackView: View {
                 .minimumScaleFactor(0.6)
                 .overlay(
                     
-                    Text("\(0.returnSuffix() ?? "0th")")
+                    Text("\(userRank.returnSuffix() ?? "0th")")
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.white)
                     
