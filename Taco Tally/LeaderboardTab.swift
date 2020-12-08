@@ -16,13 +16,69 @@ struct Leaderboard : View {
     let ref = Firestore.firestore()
     @State var topThreeUsers = [UserModel]()
     @State var firstAppear: Bool = true
+    let uid = Auth.auth().currentUser!.uid
+    @State var myRank = 0{
+        didSet{
+            print(myRank)
+        }
+    }
+    
+    
+    func fetchMyRank(startFrom: QueryDocumentSnapshot?, lastIndex: Int){
+        var arrayIndex = lastIndex
+        var query: Query!
+        query = ref.collection("users")
+            .order(by: "tacoCount", descending: true)
+            .limit(to: 30)
+ 
+        if let lastDocument =  startFrom{
+            query = query.start(afterDocument: lastDocument)
+        }
+        query.getDocuments { (querySnapshot, err) in
+            
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
+            }
+            if let snap = querySnapshot {
+                
+                if snap.count > 0 {
+                    for document in snap.documents {
+                        let tempUID = document.data()["uid"] as! String
+                        
+                        arrayIndex += 1
+                        self.myRank = arrayIndex
+                        
+                        if self.uid == tempUID{
+                            do {
+                                let userData = try FirestoreDecoder().decode(UserModel.self, from: document.data())
+                                print(userData)
+                                return
+                            }catch {
+                                print(error.localizedDescription)
+                                return
+                            }
+                        }
+                    }
+                    self.fetchMyRank(startFrom: snap.documents.last, lastIndex: arrayIndex)
+                } else {
+                    print("no TopTacoCount fount")
+                    return
+                }
+            } else {
+                print("no data returned")
+                return
+            }
+        }
+    }
     
     var body: some View{
-        TopScrollView(topThreeUsers: $topThreeUsers)
+        TopScrollView(topThreeUsers: $topThreeUsers, currentUserRank: $myRank)
             
             .onAppear(perform: {
                 if !self.firstAppear { return }
                 fetchTopThree()
+                self.fetchMyRank(startFrom: nil, lastIndex: 0)
                 self.firstAppear = false
             })
     }
@@ -63,6 +119,7 @@ struct Leaderboard : View {
             }
         }
     }
+    
 }
 
 struct TopScrollView: View {
@@ -70,7 +127,7 @@ struct TopScrollView: View {
     @StateObject var myProfileData = myProfileModel()
      
     @Binding var topThreeUsers : [UserModel]
-    
+    @Binding var currentUserRank : Int
     var body: some View {
         
         VStack {
@@ -94,7 +151,7 @@ struct TopScrollView: View {
                 
             }.padding(10)
             
-            FollowBackView(userRank: 0, image: myProfileData.userInfo.pic ?? "", username: myProfileData.userInfo.username ?? "", time: myProfileData.userInfo.tacoCount ?? 0, hometown: myProfileData.userInfo.hometown ?? "")
+            FollowBackView(userRank: currentUserRank, image: myProfileData.userInfo.pic ?? "", username: myProfileData.userInfo.username ?? "", time: myProfileData.userInfo.tacoCount ?? 0, hometown: myProfileData.userInfo.hometown ?? "")
                 .padding([.leading, .trailing], 10)
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color.white)

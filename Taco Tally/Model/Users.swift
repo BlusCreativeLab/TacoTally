@@ -27,6 +27,7 @@ struct UserModel :Codable{
 let ref = Firestore.firestore()
 
 func fetchUser(uid: String,completion: @escaping (UserModel) -> ()){
+ 
     
     ref.collection("users").document(uid).getDocument { (doc, err) in
         guard let user = doc else{return}
@@ -39,6 +40,7 @@ func fetchUser(uid: String,completion: @escaping (UserModel) -> ()){
         let hometown = user.data()?["hometown"] as! String
         let uid = user.documentID
         let tacoCount = user.data()?["tacoCount"] as! Int
+        
         
         DispatchQueue.main.async {
             completion(UserModel(uid: uid, pic: pic, username: username, firstName: firstName, lastName: lastName, about: bio, tacoCount: tacoCount, hometown: hometown))
